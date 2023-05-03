@@ -1,6 +1,6 @@
 package com.example.register_login;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 String name = nameRegister.getText().toString();
                 String email = emailRegister.getText().toString();
                 String password = passwordRegister.getText().toString();
-                String url = "http://172.31.57.244/Pet_App/member/insertData.php"; /**ipconfig**/
+                String url = "http://172.21.5.153/Pet_App/member/insertData.php"; /**ipconfig**/
                 String type = "register";
                 BackgroundWorker backgroundWorker = new BackgroundWorker(MainActivity.this);
                 backgroundWorker.execute(url,type,name,email,password);
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 String name = nameRegister.getText().toString();
                 String email = emailLogin.getText().toString();
                 String password = passwordLogin.getText().toString();
-                String url = "http://172.31.57.244/Pet_App/member/validateData.php"; /**ipconfig**/
+                String url = "http://172.21.5.153/Pet_App/member/validateData.php"; /**ipconfig**/
                 String type = "login";
                 BackgroundWorker backgroundWorker = new BackgroundWorker(MainActivity.this);
                 backgroundWorker.execute(url,type,name,email,password);

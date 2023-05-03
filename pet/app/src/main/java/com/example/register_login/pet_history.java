@@ -1,15 +1,21 @@
 package com.example.register_login;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.os.Bundle;
+import android.widget.TimePicker;
 
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,6 +26,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Calendar;
 
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.client.HttpClient;
@@ -27,65 +34,37 @@ import cz.msebera.android.httpclient.client.methods.HttpGet;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import cz.msebera.android.httpclient.util.EntityUtils;
 
-
-public class pet_history extends Activity {
-    TextView t1; // 把視圖的元件宣告成全域變數
-    String result; // 儲存資料用的字串
-
+public class pet_history extends AppCompatActivity {
+    //顯示日期、時間
+    TextView textDate,textTime;
+    //這個dialog的監聽物件(目前空)
+    DatePickerDialog.OnDateSetListener pickerDialog;
+    TimePickerDialog.OnTimeSetListener timeDialog;
+    Calendar calendar = Calendar.getInstance();//用來做date
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pet_history);
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy
-                .Builder()
-                .permitAll()
-                .build();
-        StrictMode.setThreadPolicy(policy);
-        t1 = (TextView) findViewById(R.id.textview);
-        String jsonText = "";
-
-        try {
-            HttpClient client = new DefaultHttpClient();
-            HttpGet get = new HttpGet("http://172.31.57.244/Pet_App/PetList.php");
-            HttpResponse httpResponse = client.execute(get);
-            jsonText = EntityUtils.toString(httpResponse.getEntity());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        showJson(jsonText);
-        Button btn2 = (Button) findViewById(R.id.backbtn4);
-
-        btn2.setOnClickListener(new View.OnClickListener() {
+        textDate=findViewById(R.id.textview);
+        //date裡面dialog的日期選擇給Calendar.xxx及日期文字的顯示
+        pickerDialog= new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(pet_history.this, PetHomePage.class);
-                startActivity(intent);
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR,year);//年
+                calendar.set(Calendar.MONTH,month);//月(*注意：此處的月份從0~11*)
+                calendar.set(Calendar.DATE,dayOfMonth);//日
+                textDate.setText("日期："+year+"/"+(month+1)+"/"+dayOfMonth);//使其月份+1顯示
             }
-        });
+        };
+    }
+    public void datePicker(View v){
+        //建立date的dialog
+        DatePickerDialog dialog = new DatePickerDialog(v.getContext(),
+                pickerDialog,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+        dialog.show();
     }
 
-    public void showJson(String jsonText) {
-        String s = "";
-        try {
-            JSONArray array = new JSONArray(jsonText);
-            for (int i = 0; i <1; i++) {
-                JSONObject obj = array.getJSONObject(i);
-                String petname = obj.getString("pet_name");
-                String gender = obj.getString("gender");
-                String age = obj.getString("age");
-                String type = obj.getString("type");
-                s += "名字: " + petname + "\n"
-                        +"性別: " + gender + "\n"
-                        +"年齡: " + age + "\n"
-                        +"種類: " + type + "\n";
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //t1.setText(s);
-    }
 }
-
-
-

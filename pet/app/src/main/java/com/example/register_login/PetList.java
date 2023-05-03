@@ -3,19 +3,13 @@ package com.example.register_login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.client.HttpClient;
@@ -32,6 +26,7 @@ public class PetList extends AppCompatActivity {
         t2 = (TextView) findViewById(R.id.petlist);
         Button btn2 = (Button) findViewById(R.id.backbtn);
         Button pet1 = (Button) findViewById(R.id.pet1);
+        Button test =(Button) findViewById(R.id.test);
         String result1;
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +42,13 @@ public class PetList extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PetList.this,viewpager.class);
+                startActivity(intent);
+            }
+        });
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy
                 .Builder()
                 .permitAll()
@@ -56,7 +58,7 @@ public class PetList extends AppCompatActivity {
 
         try {
             HttpClient client = new DefaultHttpClient();
-            HttpGet get = new HttpGet("http://172.31.57.244/Pet_App/PetList.php");
+            HttpGet get = new HttpGet("http://172.21.5.153/Pet_App/PetList.php");
             HttpResponse httpResponse = client.execute(get);
             jsonText = EntityUtils.toString(httpResponse.getEntity());
         } catch (Exception e) {

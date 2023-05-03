@@ -48,7 +48,7 @@ public class pet_data extends Activity {
 
         try {
             HttpClient client = new DefaultHttpClient();
-            HttpGet get = new HttpGet("http://172.31.57.244/Pet_App/PetList.php");
+            HttpGet get = new HttpGet("http://172.21.5.153/Pet_App/PetList.php");
             HttpResponse httpResponse = client.execute(get);
             jsonText = EntityUtils.toString(httpResponse.getEntity());
         } catch (Exception e) {
