@@ -11,14 +11,23 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.NameValuePair;
 import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
 import cz.msebera.android.httpclient.client.methods.HttpGet;
+import cz.msebera.android.httpclient.client.methods.HttpPost;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
+import cz.msebera.android.httpclient.message.BasicNameValuePair;
+import cz.msebera.android.httpclient.protocol.HTTP;
 import cz.msebera.android.httpclient.util.EntityUtils;
 
 public class PetList extends AppCompatActivity {
     TextView t2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +36,10 @@ public class PetList extends AppCompatActivity {
         Button btn2 = (Button) findViewById(R.id.backbtn);
         Button pet1 = (Button) findViewById(R.id.pet1);
         Button test =(Button) findViewById(R.id.test);
-        String result1;
+        Bundle bundle = getIntent().getExtras();
+        String id = bundle.getString("id");
+        btn2.setText(id);
+
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,9 +70,17 @@ public class PetList extends AppCompatActivity {
 
         try {
             HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost("http://172.21.5.153/Pet_App/PetList.php");
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("id", id));
+            post.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+            HttpResponse httpResponse = new DefaultHttpClient().execute(post);
+            String strResult = EntityUtils.toString(httpResponse.getEntity(),HTTP.UTF_8);
             HttpGet get = new HttpGet("http://172.21.5.153/Pet_App/PetList.php");
-            HttpResponse httpResponse = client.execute(get);
-            jsonText = EntityUtils.toString(httpResponse.getEntity());
+            HttpResponse httpResponse2 = client.execute(get);
+            jsonText = EntityUtils.toString(httpResponse2.getEntity());
+            jsonText = strResult;
+            //t2.setText(strResult);
         } catch (Exception e) {
             e.printStackTrace();
         }
