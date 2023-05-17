@@ -78,7 +78,6 @@ public class PetList extends AppCompatActivity {
                                         JOB.getString("gender"),
                                         JOB.getInt("age"),
                                         JOB.getString("type"),
-
                                         JOB.getString("image")
                                 ));
                             }
