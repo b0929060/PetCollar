@@ -25,6 +25,9 @@ public class PetHomePage extends AppCompatActivity{
         Button btn2 = (Button) findViewById(R.id.backbtn2);
         Button databtn = (Button) findViewById(R.id.databtn);
         Button hisbtn = (Button) findViewById(R.id.hisbtn);
+        Bundle bundle = getIntent().getExtras();
+        String id = bundle.getString("id");
+        String petid = bundle.getString("petid");
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +47,10 @@ public class PetHomePage extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PetHomePage.this, pet_history.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id",id);
+                bundle.putString("petid",petid);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

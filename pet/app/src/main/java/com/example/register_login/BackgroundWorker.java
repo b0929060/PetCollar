@@ -54,6 +54,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
             }
 
 
+
             bufferedWriter.write(post_data);
             bufferedWriter.flush();
             bufferedWriter.close();

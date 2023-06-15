@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     post.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
                     HttpResponse httpResponse = new DefaultHttpClient().execute(post);
                     String strResult = EntityUtils.toString(httpResponse.getEntity(),HTTP.UTF_8);
-                    HttpGet get = new HttpGet("http://172.21.5.153/Pet_App/member/validateData.php");
+                    HttpGet get = new HttpGet("http://172.21.5.153/member/validateData.php");
                     HttpResponse httpResponse2 = client.execute(get);
                     jsonText = EntityUtils.toString(httpResponse2.getEntity());
                     jsonText = strResult;

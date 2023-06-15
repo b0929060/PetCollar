@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,6 +28,7 @@ import cz.msebera.android.httpclient.util.EntityUtils;
 
 public class PetList extends AppCompatActivity {
     TextView t2;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +38,9 @@ public class PetList extends AppCompatActivity {
         Button btn2 = (Button) findViewById(R.id.backbtn);
         Button pet1 = (Button) findViewById(R.id.pet1);
         Button test =(Button) findViewById(R.id.test);
+        Button add =(Button) findViewById(R.id.addbtn);
         Bundle bundle = getIntent().getExtras();
-        String id = bundle.getString("id");
-        btn2.setText(id);
+        id = bundle.getString("id");
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +53,10 @@ public class PetList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PetList.this,PetHomePage.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id",id);
+                bundle.putString("petid","1");
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -60,6 +66,17 @@ public class PetList extends AppCompatActivity {
                 Intent intent = new Intent(PetList.this,viewpager.class);
                 startActivity(intent);
             }
+        });
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PetList.this,addPet.class);
+                Bundle bundle2 = new Bundle();
+                bundle2.putString("id",id);
+                intent.putExtras(bundle2);
+                startActivity(intent);
+            }
+
         });
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy
                 .Builder()
@@ -104,5 +121,6 @@ public class PetList extends AppCompatActivity {
         }
         t2.setText(s);
     }
+
 
 }
