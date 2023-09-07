@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PetApp</string>
+    <string name="loading_animation_description">Loading</string>
+
 </resources>

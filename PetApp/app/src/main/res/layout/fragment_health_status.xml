@@ -23,7 +23,7 @@
                 app:srcCompat="@drawable/heart_rate" />
 
             <TextView
-                android:id="@+id/tvHeart"
+                android:id="@+id/tvUV"
                 android:layout_width="match_parent"
                 android:layout_height="89dp"
                 android:gravity="center"

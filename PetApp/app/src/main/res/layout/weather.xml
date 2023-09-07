@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:id="@+id/temperatureBar"
+        android:layout_width="50dp"
+        android:layout_height="300dp"
+        android:layout_marginLeft="230dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="103dp"
+        android:background="@drawable/temperature_bar_custom" />
+
+    <View
+        android:id="@+id/circlePart"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="230dp"
+        android:background="@drawable/circular_part_custom" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/tvImageUV"
+            android:layout_width="222dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="185dp"
+            app:srcCompat="@drawable/uv2" />
+
+        <ImageView
+            android:id="@+id/tvImageTemp"
+            android:layout_width="match_parent"
+            android:layout_height="930dp"
+            app:srcCompat="@drawable/t3" />
+
+        <TextView
+            android:id="@+id/tvTEMP"
+            android:layout_width="200dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="380dp"
+            android:gravity="left"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/tvUV"
+            android:layout_width="174dp"
+            android:layout_height="89dp"
+            android:layout_marginTop="50dp"
+            android:gravity="left"
+            android:textSize="30dp" />
+
+
+    </FrameLayout>
+
+</RelativeLayout>

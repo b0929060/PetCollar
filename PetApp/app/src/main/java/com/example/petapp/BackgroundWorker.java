@@ -83,7 +83,14 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-        alertDialog.setMessage(result);
+        String status = "";
+        if(GobalVal.userId != -1)
+        {
+            status = "Login Sucess!"+GobalVal.userId;
+        }else{
+            status = "Login not Sucess!";
+        }
+        alertDialog.setMessage(status);
         alertDialog.show();
         //Toast.makeText(context.getApplicationContext(),result,Toast.LENGTH_LONG).show();
 

@@ -26,6 +26,8 @@ public class PetInfoFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pet_info, container, false);
+        setPet(pet);
+
 
         // 獲取介面元素
         mNameTextView = view.findViewById(R.id.tvName);
@@ -35,16 +37,18 @@ public class PetInfoFragment extends Fragment {
         mImageView = view.findViewById(R.id.ivImage);
 
 
+
         // 從PetDetailActivity中獲取Pet對象
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            pet = (Pet) bundle.getSerializable("pet");
+        //Bundle bundle = getArguments();
+        //if (bundle != null) {
+            //pet = (Pet) bundle.getSerializable("pet");
             mNameTextView.setText(pet.getName());
             mGenderTextView.setText(pet.getGender());
             mAgeTextView.setText(String.valueOf(pet.getAge()));
             mTypeTextView.setText(pet.getType());
             Picasso.get().load(pet.getImageUrl()).into(mImageView);
-        }
+        //}
+
 
 
 
@@ -55,6 +59,9 @@ public class PetInfoFragment extends Fragment {
         //mTypeTextView.setText(pet.getType());
 
         return view;
+    }
+    public void setPet(Pet pet) {
+        this.pet = pet;
     }
     @Override
     public void onResume() {
@@ -68,6 +75,5 @@ public class PetInfoFragment extends Fragment {
             Picasso.get().load(pet.getImageUrl()).into(mImageView);
         }
     }
-
 
 }

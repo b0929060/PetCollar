@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorRed">#ff0000</color> <!-- 紅色 (40°C) -->
+    <color name="colorOrange">#ff9900</color> <!-- 橘色 (35°C) -->
+    <color name="colorYellow">#ffff00</color> <!-- 黃色 (30°C) -->
+    <color name="colorGreen">#00ff00</color> <!-- 綠色 (25°C) -->
+    <color name="colorBlue">#00ffff</color> <!-- 淺藍色 (20°C) -->
+    <color name="colorEnd">#0000ff</color> <!-- 藍色 (15°C) -->
+    <color name="colorGray">#808080</color> <!-- 灰色 (10°C) -->
+    <color name="colorWhite">#ffffff</color> <!-- 白色 (0°C) -->
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
 </resources>

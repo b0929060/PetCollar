@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -17,13 +18,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PetList extends AppCompatActivity {
 
     //this is the JSON Data URL
     //make sure you are using the correct ip else it will not work
-    private static final String URL_PRODUCTS = "http://192.168.124.195/Pet_App/member/petlist.php";
+    private static final String URL_PRODUCTS = "http://"+GobalVal.ip+"/Pet_App/member/petlist.php";
 
     //a list to store all the products
     List<Pet> pets;
@@ -50,7 +53,6 @@ public class PetList extends AppCompatActivity {
     }
 
     private void loadlist() {
-
         /*
          * Creating a String Request
          * The request type is GET defined by first parameter
@@ -58,7 +60,7 @@ public class PetList extends AppCompatActivity {
          * Then we have a Response Listener and a Error Listener
          * In response listener we will get the JSON response as a String
          * */
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_PRODUCTS,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, GobalVal.url+"petlist.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -74,6 +76,7 @@ public class PetList extends AppCompatActivity {
 
                                 //adding the product to product list
                                 pets.add(new Pet(
+                                        JOB.getString("pet_id"),
                                         JOB.getString("pet_name"),
                                         JOB.getString("gender"),
                                         JOB.getInt("age"),
@@ -95,8 +98,14 @@ public class PetList extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
 
                     }
-                });
-
+                }){
+            protected Map<String, String> getParams() throws AuthFailureError {
+                // 在這裡返回帶有用戶 id 的請求參數
+                Map<String, String> params = new HashMap<>();
+                params.put("id", String.valueOf(GobalVal.userId));
+                return params;
+            }
+        };
         //adding our stringrequest to queue
         Volley.newRequestQueue(this).add(stringRequest);
     }

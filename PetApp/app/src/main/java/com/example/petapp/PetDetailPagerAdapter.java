@@ -1,7 +1,5 @@
 package com.example.petapp;
 
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -24,22 +22,30 @@ public class PetDetailPagerAdapter extends FragmentPagerAdapter {
 
             case 0:
                 PetInfoFragment petInfoFragment = new PetInfoFragment();
-                Bundle bundle = new Bundle();
+                /*Bundle bundle = new Bundle();
                 bundle.putSerializable("pet", pet);
                 petInfoFragment.setArguments(bundle);
+                 */
+                petInfoFragment.setPet(pet);
                 return petInfoFragment;
             case 1:
-                HealthStatusFragment heartStatusFragment = new HealthStatusFragment();
-                Bundle bundle1 = new Bundle();
+                HealthStatusFragment HealthStatusFragment = new HealthStatusFragment();
+                /*Bundle bundle1 = new Bundle();
                 bundle1.putSerializable("pet", pet);
                 heartStatusFragment.setArguments(bundle1);
-                return new HealthStatusFragment();
+
+                 */
+                HealthStatusFragment.setPet(pet);
+                return HealthStatusFragment;
             case 2:
-                ActivityMonitoringFragment activityMonitoringFragment = new ActivityMonitoringFragment();
+                ActivityMonitoringFragment ActivityMonitoringFragment = new ActivityMonitoringFragment();
+                /*
                 Bundle bundle2 = new Bundle();
                 bundle2.putSerializable("pet", pet);
-                activityMonitoringFragment.setArguments(bundle2);
-                return new ActivityMonitoringFragment();
+                ActivityMonitoringFragment.setArguments(bundle2);
+                 */
+                ActivityMonitoringFragment.setPet(pet);
+                return ActivityMonitoringFragment;
             default:
                 return null;
         }
